@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kocteles</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <main id="app">
+        <h1>Cocteles Karen</h1>
+        <input v-model="s" @input="getCs" />
+      
+      <details v-for="c in cs">
+        <summary>{{c.strDrink}}</summary>
+        <img :src="c.strDrinkThumb" height="140"/>
+          
+      <p>{{c.strInstructions}}</p>
+      </details>
+      </main>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const cs = ref([])
+                const s = ref('Cuba')
+
+                async function getCs() {
+                    const response = await fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + s.value).then(r => r.json())
+                    console.log(response);
+                    cs.value = response.drinks
+                }
+                return {
+                    cd, c, getCs
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>
