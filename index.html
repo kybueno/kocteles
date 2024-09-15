@@ -6,20 +6,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kocteles</title>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body{
+            color:#000b;
+            font-family: 'Roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1{
+            color:#0008;
+            
+        }
+        #cocktails-list>div{
+            background: linear-gradient(to bottom, #eefa,#fff8,#eefa);
+            backdrop-filter: blur(8px);
+            padding: 16px;
+            width:fit-content;
+            border-radius: 24px;
+            margin-block: 16px;
+            box-shadow: -1px 1px 8px 0 #fffe inset;
+            transition:all;
+            display: flex;
+            gap: 20px;
+             
+        }
+        #cocktails-list p {
+            max-width: 300px;
+        }
+        #cocktails-list img {
+            border-radius: 22px;
+        }
+    </style>
 </head>
 
-<body>
+<body style="background: url('https://www.thecocktaildb.com/images/media/drink/jwmr1x1504372337.jpg');">
     <h1>Cocteles Karen</h1>
 
     <div id="app">
 
         <input v-model="s" @input="getCs" />
 
-        <details v-for="c in cs">
-            <summary>{{c.strDrink}}</summary>
+       <div id="cocktails-list" v-show="cs.length">
+        <div v-for="c in cs">
             <img :src="c.strDrinkThumb" height="140" />
-            <p>{{c.strInstructions}}</p>
-        </details>
+            <div><b>{{c.strDrink}}</b><br/>
+            <p>{{c.strInstructions}}</p></div>
+        </div>
+       </div> 
     </div>
 
     <script>
